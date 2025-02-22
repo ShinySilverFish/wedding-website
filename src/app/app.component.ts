@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CountdownComponent } from './countdown/countdown.component';
+import { RouterModule } from '@angular/router';
+import { HeroComponent } from './hero/hero.component';
+import { RsvpComponent } from './rsvp/rsvp.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CountdownComponent],
+  imports: [RouterModule],
   template: `
-    <app-countdown></app-countdown>
-    <router-outlet />
+    <router-outlet></router-outlet>
   `,
-  styles: []
 })
-export class AppComponent {
-  title = 'wedding-website';
-}
+export class AppComponent {}
