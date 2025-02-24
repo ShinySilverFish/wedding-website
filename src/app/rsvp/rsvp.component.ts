@@ -29,8 +29,8 @@ import { Router } from '@angular/router';
     .rsvp-section {
       position: relative;
       width: 100%;
-      min-height: 98.8vh;
-      background: url('../../assets/rsvp-image.jpg') center/cover no-repeat;
+      min-height: 98.2vh;
+      background: url('../../assets/hero-image.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -83,15 +83,37 @@ import { Router } from '@angular/router';
       padding: 12px;
       font-size: 1rem;
       border-radius: 8px;
-      border: 2px solid #d1a87c;
-      background: rgba(255, 255, 255, 0.9);
-      color: #4a3f35;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
       font-family: 'Playfair Display', serif;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease-in-out;
+      appearance: none;
     }
 
     .rsvp-form input::placeholder,
     .rsvp-form select {
-      color: #6d5c4f;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .rsvp-form input:focus,
+    .rsvp-form select:focus {
+      border-color: #d1a87c;
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
+    }
+
+    .rsvp-form select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 12px;
+    }
+
+    .rsvp-form select option {
+      background: white;
+      color: #4a3f35;
     }
 
     .rsvp-submit-button {
