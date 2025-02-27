@@ -31,6 +31,10 @@ import { CountdownComponent } from '../countdown/countdown.component';
               <span class="detail-value">Panorama Wedding Farm, Franskraal, Gansbaai, Western Cape</span>
             </li>
             <li>
+              <span class="detail-label">Accommodation:</span>
+              <span class="detail-value">Please contact (+27)84 767 4688 for assistance</span>
+            </li>
+            <li>
               <span class="detail-label">Reception Time:</span>
               <span class="detail-value">14:00</span>
             </li>
@@ -57,7 +61,7 @@ import { CountdownComponent } from '../countdown/countdown.component';
     .hero {
       position: relative;
       width: 100%;
-      min-height: 98.8vh;
+      min-height: 98.3vh;
       background: url('../../assets/hero-image.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
@@ -186,7 +190,7 @@ import { CountdownComponent } from '../countdown/countdown.component';
       width: 90%;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .modal-content {
@@ -218,8 +222,8 @@ import { CountdownComponent } from '../countdown/countdown.component';
 
     .wedding-details li {
       display: grid;
-      grid-template-columns: 120px 1fr; /* Fixed width for labels, flexible for values */
-      gap: 10px; /* Space between label and value */
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
       margin-bottom: 10px;
       font-size: 1rem;
       line-height: 1.5;

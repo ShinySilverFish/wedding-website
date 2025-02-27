@@ -1,4 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, Routes } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { HeroComponent } from './app/hero/hero.component';
@@ -10,5 +11,5 @@ const routes: Routes = [
 ];
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes), provideHttpClient()]
 }).catch(err => console.error(err));

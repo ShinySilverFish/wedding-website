@@ -1,26 +1,31 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders, withFetch } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rsvp',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   template: `
     <section class="rsvp-section">
       <div class="rsvp-overlay"></div>
       <h2 class="rsvp-title">RSVP Now</h2>
       <p class="rsvp-subtitle">We’d love to celebrate with you! Let us know if you can make it.</p>
-      <form class="rsvp-form">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <select required>
+      <form class="rsvp-form" (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="Your Name" required [(ngModel)]="name" name="name" />
+        <input type="email" placeholder="Your Email" required [(ngModel)]="email" name="email" />
+        <select required [(ngModel)]="attending" name="attending">
           <option value="">Will you be attending?</option>
           <option value="yes">Yes, I’ll be there!</option>
           <option value="no">Sorry, I can't make it.</option>
         </select>
+        <input type="text" placeholder="Plus One (Optional)" [(ngModel)]="plusOne" name="plusOne" />
         <button type="submit" class="rsvp-submit-button">Submit RSVP</button>
       </form>
       <button class="back-button" (click)="goBack()">Back to Home</button>
+      <p *ngIf="responseMessage" class="response-message">{{ responseMessage }}</p>
     </section>
   `,
   styles: [`
@@ -159,7 +164,6 @@ import { Router } from '@angular/router';
       color: white;
     }
 
-    /* Mobile-friendly adjustments */
     @media (max-width: 768px) {
       .rsvp-title {
         font-size: 2.5rem;
@@ -196,9 +200,42 @@ import { Router } from '@angular/router';
   `]
 })
 export class RsvpComponent {
-  constructor(private router: Router) {}
+  name: string = '';
+  email: string = '';
+  attending: string = '';
+  plusOne: string = '';
+  responseMessage: string = '';
+
+  constructor(private router: Router, private http: HttpClient) {}
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  onSubmit() {
+    const apiUrl = 'https://t7zwa94554.execute-api.eu-north-1.amazonaws.com/prod/GuestResponses';
+    const apiKey = '4enSlY6gFYaPquawmH7Pd2vAhu2DUdWa26sTsWsN';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey
+    });
+
+    const body = {
+      name: this.name,
+      email: this.email,
+      attending: this.attending === 'yes',
+      plus_one: this.plusOne || null
+    };
+
+    this.http.post(apiUrl, body, { headers }).subscribe({
+      next: (response: any) => {
+        this.responseMessage = 'RSVP saved successfully!';
+        console.log('RSVP saved:', response);
+      },
+      error: (error) => {
+        this.responseMessage = 'Failed to save RSVP. Please try again.';
+        console.error('Error saving RSVP:', error);
+      }
+    });
   }
 }
